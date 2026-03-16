@@ -74,7 +74,7 @@ bd-carbonfact-suppliers/
 
 ### Claude.ai (Recommended)
 
-1. Download the `.skill` file from [Releases](../../releases)
+1. Download the `.skill` file
 2. Go to **Settings → Features → Skills**
 3. Upload the `.skill` file
 4. Toggle it **on**
@@ -84,7 +84,7 @@ bd-carbonfact-suppliers/
 
 ```bash
 # Clone and copy to your skills directory
-git clone https://github.com/YOUR_USERNAME/bd-carbonfact-suppliers.git
+git clone https://github.com/nicoeos/bd-carbonfact-suppliers.git
 cp -r bd-carbonfact-suppliers ~/.claude/skills/
 ```
 
