@@ -32,14 +32,14 @@ Provide any combination of the following about the supplier you want to prospect
 
 When the user provides supplier context (website, materials, key stakeholder LinkedIn URL, notes), execute these steps in order:
 
-1. **Research the supplier** → fetch website, extract materials, certifications, clients, sustainability claims
+1. **Deep research** → read `references/deep-research.md` and execute all 4 phases: company status, recent context, evidence-backed pain points, pain-to-Carbonfact solution mapping. This is the foundation — everything downstream depends on it.
 2. **Classify** → Tier 1, 2, or 3
 3. **Diagnose phase** → Phase 0, 1, 2, or 3
 4. **Score the lead** → ICP score (0–100)
 5. **Calculate intro-call probability** → % likelihood of booking a demo
 6. **If probability < 50%** → output specific recommendations to increase conversion
 7. **Map market opportunity** → regulated markets + brand segments creating demand
-8. **Select prospecting angle** → A (organize, don't duplicate), B (be where sourcing happens), or C (regulation as sales pitch)
+8. **Select prospecting angle** → A, B, or C — informed by the strongest pain point from Step 1
 9. **Inject pain points into emails** → rewrite email body around the supplier's specific pains — do NOT just fill in template placeholders
 10. **Generate tailored outreach** → email sequence (Initial + FU1 + FU2) built from pain-injected structure
 11. **Prepare objection handling** → top 3 likely objections predicted from pain profile
@@ -49,15 +49,32 @@ When the user provides supplier context (website, materials, key stakeholder Lin
 
 ---
 
-## 1. Supplier Research (CRITICAL — always do this first)
+## 1. Deep Prospect Research (CRITICAL — always do this first)
 
-When the user provides a supplier website URL:
-1. Use `web_fetch` to retrieve the site homepage and any `/sustainability`, `/about`, `/materials`, `/certifications` pages
-2. Extract: materials/processes offered, certifications (GRS, OEKO-TEX, Bluesign, LWG, ISO 14040/44), sustainability claims, published LCA data, client logos/names, key contacts (Head of Sustainability, Innovation Director)
-3. If a LinkedIn URL is provided, note the person's title and role for personalization
-4. Use this extracted data to populate the classification, ICP scoring, and email personalization — do not ask the user for information you can find yourself
+**Before classifying, scoring, or drafting anything — read `references/deep-research.md` and execute all 4 phases.**
 
-If the URL is not provided, ask the user for it or for the key data points needed to classify.
+This is not optional. The quality of the entire pipeline depends on this step. Skipping research produces generic outputs. Deep research produces emails that get replies.
+
+### What to do:
+
+1. **Use `web_fetch`** to retrieve the supplier's homepage + `/sustainability`, `/about`, `/materials`, `/certifications` pages
+2. **Use `web_search`** for recent news (last 3–6 months): production milestones, partnerships, financial context, executive changes, regulatory developments
+3. If LinkedIn URLs are provided, note stakeholder titles and roles for personalization
+4. **Execute all 4 phases** from `references/deep-research.md`:
+   - Phase 1: Company status & credentials (numbers and dates)
+   - Phase 2: Recent context & timeline (wins, challenges, inflection points)
+   - Phase 3: Pain point identification (evidence-backed, no assumptions)
+   - Phase 4: Pain → Carbonfact solution mapping (feeds directly into email injection in Section 8)
+5. Use this research to populate classification, ICP scoring, angle selection, and email personalization — do not ask the user for information you can find yourself
+
+### What you should have after this step:
+- 2–3 evidence-backed pain points with sources
+- Each pain mapped to a Carbonfact solution and prospecting angle
+- At least one named stakeholder with title
+- An opening hook based on a recent event (not generic congratulations)
+- Predicted top objection based on pain profile
+
+If the URL is not provided, ask the user for it or for the key data points needed.
 
 ---
 
@@ -221,7 +238,7 @@ After research (Step 1) and angle selection (Step 8), identify the supplier's to
 
 ### When no deep research is available
 
-If the user only provides a company name and URL (no pre-research from `b2b-prospect-research`), fall back to the standard templates in `references/email-sequences.md` — but still personalize using whatever was extracted from the website in Step 1. The templates are the floor, not the ceiling.
+If the user only provides a company name and URL with no additional context, the research phase (Step 1) will still surface pain points from the website and recent news. If even that yields nothing, fall back to the standard templates in `references/email-sequences.md` — but still personalize using whatever was extracted. The templates are the floor, not the ceiling.
 
 ---
 
@@ -231,6 +248,7 @@ For detailed content, read these files from `references/` as needed:
 
 | File | When to read |
 |---|---|
+| `references/deep-research.md` | **ALWAYS read first** — Step 1 of pipeline. Contains the 4-phase research methodology + pain-to-Carbonfact mapping |
 | `references/email-sequences.md` | As the starting structure for email drafts — then rewrite using pain injection (Section 8) |
 | `references/objection-handling.md` | When preparing objection responses or handling supplier pushback |
 | `references/competitive-positioning.md` | When asked about Vaayu, Fairlymade, consultancies, or "how are you different?" |
@@ -239,7 +257,7 @@ For detailed content, read these files from `references/` as needed:
 | `references/faq.md` | When answering supplier questions about how the platform works, data security, pricing, verification process |
 | `references/tracking-template.md` | When the user wants to track pipeline status across multiple suppliers |
 
-Read `references/email-sequences.md` for the base structure, then apply pain injection from Section 8. Read `references/faq.md` when handling objections or preparing for calls.
+**Always** read `references/deep-research.md` first. Then read `references/email-sequences.md` for base email structure. Apply pain injection from Section 8. Read `references/faq.md` when handling objections.
 
 ---
 
@@ -249,6 +267,20 @@ When the user provides supplier data, respond with this structure:
 
 ```
 ## Supplier Analysis: [COMPANY NAME]
+
+### Research Summary
+- **Product/Service**: [What they make — specific materials/processes]
+- **Stage**: [Startup / Scale-up / Enterprise / Post-restructuring]
+- **Production status**: [Active / Scaling / Restarting / Pilot] — [source URL]
+- **Notable clients**: [Named brands with dates] — [source URL]
+- **Technical credentials**: [LCA data, certifications, third-party verification — with numbers] — [source URL]
+- **Data gaps**: [What environmental data is missing or unverified]
+- **Recent context**: [Key development from last 3 months that shapes the approach] — [source URL]
+
+### Key Stakeholders
+| Name | Title | Why they matter | Approach |
+|---|---|---|---|
+| [Name] | [Title] | [Decision-maker / influencer / champion] | [Email / LinkedIn / Referral] |
 
 ### Classification
 - **Tier**: [1/2/3] — [one-line justification]
@@ -272,9 +304,9 @@ When the user provides supplier data, respond with this structure:
 - **Personalization points**: [specific references for outreach]
 
 ### Pain Points Driving the Approach
-- **Pain #1 (Initial email)**: [Pain + evidence] → [How email addresses it]
-- **Pain #2 (FU1)**: [Pain + evidence] → [How FU1 reinforces]
-- **Pain #3 (FU2 urgency)**: [Pain + evidence] → [Urgency angle used]
+- **Pain #1 (Initial email)**: [Pain + evidence + [source](URL)] → [How email addresses it]
+- **Pain #2 (FU1)**: [Pain + evidence + [source](URL)] → [How FU1 reinforces]
+- **Pain #3 (FU2 urgency)**: [Pain + evidence + [source](URL)] → [Urgency angle used]
 
 ### Email Drafts
 [Initial Outreach — opens with Pain #1 from their perspective, pivots to Carbonfact as the solution. NOT a template with swapped placeholders.]
@@ -293,6 +325,12 @@ When the user provides supplier data, respond with this structure:
 
 ### Next Action
 [Concrete step with timeline]
+
+### Sources
+[Every claim in the analysis must trace back to a URL. List all sources used during research with clickable links.]
+- [Source title](URL) — [Key finding used in this analysis]
+- [Source title](URL) — [Key finding used in this analysis]
+- [Source title](URL) — [Key finding used in this analysis]
 ```
 
 ---

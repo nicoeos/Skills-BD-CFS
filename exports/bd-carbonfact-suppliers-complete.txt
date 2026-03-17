@@ -1,17 +1,7 @@
 ================================================================================
 BD SKILL — CARBONFACT FOR SUPPLIERS
-Complete Skill Documentation (Updated 2026-03-17)
+Complete Skill Documentation — 2026-03-17
 ================================================================================
-
-TABLE OF CONTENTS
-1. SKILL.md (Core Logic)
-2. references/email-sequences.md
-3. references/objection-handling.md
-4. references/competitive-positioning.md
-5. references/market-opportunity.md
-6. references/linkedin-cadence.md
-7. references/faq.md
-8. references/tracking-template.md
 
 ================================================================================
 FILE: SKILL.md
@@ -51,14 +41,14 @@ Provide any combination of the following about the supplier you want to prospect
 
 When the user provides supplier context (website, materials, key stakeholder LinkedIn URL, notes), execute these steps in order:
 
-1. **Research the supplier** → fetch website, extract materials, certifications, clients, sustainability claims
+1. **Deep research** → read `references/deep-research.md` and execute all 4 phases: company status, recent context, evidence-backed pain points, pain-to-Carbonfact solution mapping. This is the foundation — everything downstream depends on it.
 2. **Classify** → Tier 1, 2, or 3
 3. **Diagnose phase** → Phase 0, 1, 2, or 3
 4. **Score the lead** → ICP score (0–100)
 5. **Calculate intro-call probability** → % likelihood of booking a demo
 6. **If probability < 50%** → output specific recommendations to increase conversion
 7. **Map market opportunity** → regulated markets + brand segments creating demand
-8. **Select prospecting angle** → A (organize, don't duplicate), B (be where sourcing happens), or C (regulation as sales pitch)
+8. **Select prospecting angle** → A, B, or C — informed by the strongest pain point from Step 1
 9. **Inject pain points into emails** → rewrite email body around the supplier's specific pains — do NOT just fill in template placeholders
 10. **Generate tailored outreach** → email sequence (Initial + FU1 + FU2) built from pain-injected structure
 11. **Prepare objection handling** → top 3 likely objections predicted from pain profile
@@ -68,15 +58,32 @@ When the user provides supplier context (website, materials, key stakeholder Lin
 
 ---
 
-## 1. Supplier Research (CRITICAL — always do this first)
+## 1. Deep Prospect Research (CRITICAL — always do this first)
 
-When the user provides a supplier website URL:
-1. Use `web_fetch` to retrieve the site homepage and any `/sustainability`, `/about`, `/materials`, `/certifications` pages
-2. Extract: materials/processes offered, certifications (GRS, OEKO-TEX, Bluesign, LWG, ISO 14040/44), sustainability claims, published LCA data, client logos/names, key contacts (Head of Sustainability, Innovation Director)
-3. If a LinkedIn URL is provided, note the person's title and role for personalization
-4. Use this extracted data to populate the classification, ICP scoring, and email personalization — do not ask the user for information you can find yourself
+**Before classifying, scoring, or drafting anything — read `references/deep-research.md` and execute all 4 phases.**
 
-If the URL is not provided, ask the user for it or for the key data points needed to classify.
+This is not optional. The quality of the entire pipeline depends on this step. Skipping research produces generic outputs. Deep research produces emails that get replies.
+
+### What to do:
+
+1. **Use `web_fetch`** to retrieve the supplier's homepage + `/sustainability`, `/about`, `/materials`, `/certifications` pages
+2. **Use `web_search`** for recent news (last 3–6 months): production milestones, partnerships, financial context, executive changes, regulatory developments
+3. If LinkedIn URLs are provided, note stakeholder titles and roles for personalization
+4. **Execute all 4 phases** from `references/deep-research.md`:
+   - Phase 1: Company status & credentials (numbers and dates)
+   - Phase 2: Recent context & timeline (wins, challenges, inflection points)
+   - Phase 3: Pain point identification (evidence-backed, no assumptions)
+   - Phase 4: Pain → Carbonfact solution mapping (feeds directly into email injection in Section 8)
+5. Use this research to populate classification, ICP scoring, angle selection, and email personalization — do not ask the user for information you can find yourself
+
+### What you should have after this step:
+- 2–3 evidence-backed pain points with sources
+- Each pain mapped to a Carbonfact solution and prospecting angle
+- At least one named stakeholder with title
+- An opening hook based on a recent event (not generic congratulations)
+- Predicted top objection based on pain profile
+
+If the URL is not provided, ask the user for it or for the key data points needed.
 
 ---
 
@@ -240,7 +247,7 @@ After research (Step 1) and angle selection (Step 8), identify the supplier's to
 
 ### When no deep research is available
 
-If the user only provides a company name and URL (no pre-research from `b2b-prospect-research`), fall back to the standard templates in `references/email-sequences.md` — but still personalize using whatever was extracted from the website in Step 1. The templates are the floor, not the ceiling.
+If the user only provides a company name and URL with no additional context, the research phase (Step 1) will still surface pain points from the website and recent news. If even that yields nothing, fall back to the standard templates in `references/email-sequences.md` — but still personalize using whatever was extracted. The templates are the floor, not the ceiling.
 
 ---
 
@@ -250,6 +257,7 @@ For detailed content, read these files from `references/` as needed:
 
 | File | When to read |
 |---|---|
+| `references/deep-research.md` | **ALWAYS read first** — Step 1 of pipeline. Contains the 4-phase research methodology + pain-to-Carbonfact mapping |
 | `references/email-sequences.md` | As the starting structure for email drafts — then rewrite using pain injection (Section 8) |
 | `references/objection-handling.md` | When preparing objection responses or handling supplier pushback |
 | `references/competitive-positioning.md` | When asked about Vaayu, Fairlymade, consultancies, or "how are you different?" |
@@ -258,7 +266,7 @@ For detailed content, read these files from `references/` as needed:
 | `references/faq.md` | When answering supplier questions about how the platform works, data security, pricing, verification process |
 | `references/tracking-template.md` | When the user wants to track pipeline status across multiple suppliers |
 
-Read `references/email-sequences.md` for the base structure, then apply pain injection from Section 8. Read `references/faq.md` when handling objections or preparing for calls.
+**Always** read `references/deep-research.md` first. Then read `references/email-sequences.md` for base email structure. Apply pain injection from Section 8. Read `references/faq.md` when handling objections.
 
 ---
 
@@ -268,6 +276,20 @@ When the user provides supplier data, respond with this structure:
 
 ```
 ## Supplier Analysis: [COMPANY NAME]
+
+### Research Summary
+- **Product/Service**: [What they make — specific materials/processes]
+- **Stage**: [Startup / Scale-up / Enterprise / Post-restructuring]
+- **Production status**: [Active / Scaling / Restarting / Pilot] — [source URL]
+- **Notable clients**: [Named brands with dates] — [source URL]
+- **Technical credentials**: [LCA data, certifications, third-party verification — with numbers] — [source URL]
+- **Data gaps**: [What environmental data is missing or unverified]
+- **Recent context**: [Key development from last 3 months that shapes the approach] — [source URL]
+
+### Key Stakeholders
+| Name | Title | Why they matter | Approach |
+|---|---|---|---|
+| [Name] | [Title] | [Decision-maker / influencer / champion] | [Email / LinkedIn / Referral] |
 
 ### Classification
 - **Tier**: [1/2/3] — [one-line justification]
@@ -291,9 +313,9 @@ When the user provides supplier data, respond with this structure:
 - **Personalization points**: [specific references for outreach]
 
 ### Pain Points Driving the Approach
-- **Pain #1 (Initial email)**: [Pain + evidence] → [How email addresses it]
-- **Pain #2 (FU1)**: [Pain + evidence] → [How FU1 reinforces]
-- **Pain #3 (FU2 urgency)**: [Pain + evidence] → [Urgency angle used]
+- **Pain #1 (Initial email)**: [Pain + evidence + [source](URL)] → [How email addresses it]
+- **Pain #2 (FU1)**: [Pain + evidence + [source](URL)] → [How FU1 reinforces]
+- **Pain #3 (FU2 urgency)**: [Pain + evidence + [source](URL)] → [Urgency angle used]
 
 ### Email Drafts
 [Initial Outreach — opens with Pain #1 from their perspective, pivots to Carbonfact as the solution. NOT a template with swapped placeholders.]
@@ -312,6 +334,12 @@ When the user provides supplier data, respond with this structure:
 
 ### Next Action
 [Concrete step with timeline]
+
+### Sources
+[Every claim in the analysis must trace back to a URL. List all sources used during research with clickable links.]
+- [Source title](URL) — [Key finding used in this analysis]
+- [Source title](URL) — [Key finding used in this analysis]
+- [Source title](URL) — [Key finding used in this analysis]
 ```
 
 ---
@@ -339,6 +367,148 @@ Output as a structured note the user can paste into their tracking tool.
 - **Customers**: https://www.carbonfact.com/customers
 - **Trust center**: https://trust.carbonfact.com
 
+================================================================================
+FILE: references/deep-research.md
+================================================================================
+
+# Deep Prospect Research — Carbonfact for Suppliers BD
+
+This is the research methodology for Step 1 of the BD pipeline. Execute all 4 phases before moving to classification (Step 2).
+
+## Phase 1: Company Status & Credentials
+
+**Use `web_search` and `web_fetch` to find:**
+
+### 1.1 Production/operational status
+- Current production capacity and scale
+- Facility locations
+- Recent operational changes (expansions, closures, restarts, acquisitions)
+- Technology or process innovations
+
+### 1.2 Client/partnership commitments
+- Named brand partnerships or volume commitments (get specific names and dates)
+- Recent contract announcements
+- Strategic partnerships (fiber producers, manufacturers, retailers)
+- Customer testimonials or case studies
+
+### 1.3 Technical credentials
+- LCA studies or carbon footprint data — look for specific numbers: kg CO₂e, % reduction, system boundaries
+- Certifications (GOTS, OEKO-TEX, Bluesign, GRS, LWG, B Corp, ISO 14040/44)
+- Third-party verification studies (who reviewed, when)
+- EPDs (Environmental Product Declarations)
+- Environmental claims with quantified impact
+
+### 1.4 Financial/ownership context
+- Funding rounds or investment announcements (amount, date, investors)
+- Ownership changes (PE acquisitions, restructuring, mergers)
+- Revenue/valuation if public
+- Bankruptcy, financial stress, or credit warnings — this changes the entire approach
+
+**Key principle:** Look for NUMBERS and DATES. "11 brand commitments" beats "several partners." "Q4 2026 production restart" beats "upcoming launch." "−2 kg CO₂e per kg pulp" beats "low carbon footprint." If you can't find a number, flag it as a data gap.
+
+---
+
+## Phase 2: Recent Context & Timeline (last 3–6 months)
+
+**Search for:**
+- Product launches or production milestones
+- Executive changes or strategic pivots
+- Regulatory developments affecting the company
+- Industry events, trade show appearances, or partnerships announced
+- Market challenges, competitive threats, or public criticism
+- LinkedIn activity from key stakeholders (what are they posting about?)
+
+**Synthesize into:**
+- **Recent wins:** New clients, milestones, funding, awards
+- **Recent challenges:** Delays, financial pressure, market shifts
+- **Inflection points:** Major changes that shift their strategy — new regulation, new ownership, new market entry
+
+---
+
+## Phase 3: Pain Point Identification
+
+Every pain point MUST have evidence. No assumptions. No invented pains.
+
+### For suppliers/manufacturers:
+
+| Pain category | What to look for | Evidence sources |
+|---|---|---|
+| **Discovery/visibility** | Hard for brands to find them | No presence on sourcing platforms, limited digital marketing |
+| **Data sharing anxiety** | IP protection concerns, NDA fatigue | Mentions of proprietary processes, reluctance to publish data |
+| **Volume anxiety** | Need committed orders, not just interest | Small production runs, fundraising for scale-up |
+| **Price premium justification** | Struggle to prove ROI vs conventional | Price comparisons in press, "premium" language |
+| **Credibility gaps** | Need third-party verification, trust rebuilding | Bankruptcy history, greenwashing accusations, no third-party LCA |
+| **Regulatory compliance** | CSRD, DPP, French Eco-Score pressure | EU-based or selling into EU, compliance mentions |
+| **Repetitive data requests** | Multiple brands asking same data, different formats | Large client base, manual PDF/email processes |
+| **Capacity constraints** | Can't scale to meet demand | Waitlists, expansion announcements |
+
+### For brands/retailers:
+
+| Pain category | What to look for |
+|---|---|
+| **Supply chain transparency** | Don't know environmental impact of materials |
+| **Regulatory pressure** | CSRD Scope 3, ESPR, DPP deadlines |
+| **Greenwashing risk** | Need credible, verified sustainability data |
+| **Supplier discovery** | Can't find innovative material sources at scale |
+| **Cost pressures** | Sustainable materials cost more — need to justify |
+
+**Output format per pain point:**
+```
+Pain Point: [Clear, specific statement]
+Evidence: [Quote, data point, or recent action proving this]
+Source: [Clickable markdown link — format: [Source title](URL) — Month Year]
+Severity: Critical / High / Medium
+```
+
+**Source links are mandatory.** Every pain point needs a clickable URL. If you can't find a source for a pain, don't include it. The final output must contain a Sources section at the bottom with all URLs used in the analysis, formatted as clickable markdown links: `[Title](URL) — key finding`.
+
+---
+
+## Phase 4: Pain → Carbonfact Solution Mapping
+
+For each pain identified in Phase 3, map to a specific Carbonfact for Suppliers capability. This feeds directly into the pain-to-email injection (Section 8 of the main skill).
+
+| Supplier pain | Carbonfact solution | Proof point |
+|---|---|---|
+| Discovery/visibility | Profile discoverable inside eco-design tools used by 200+ brands | Brands compare materials in real-time simulations |
+| Data sharing anxiety | Brands see verified data + system boundary only — never the raw LCA. Brand-by-brand access control, revocable anytime | Access control dashboard, NDA available |
+| Repetitive data requests | One verified profile replaces per-brand PDF/NDA/email cycles | Angle A: "Organize, don't duplicate" |
+| Credibility gaps | Free LCA verification by Carbonfact Science team (PEF-aligned, ISO 14040/44) | Verification at no cost, comparable methodology |
+| Price premium justification | Verified environmental data lets brands quantify impact advantage vs conventional | Eco-design simulations show the delta |
+| Regulatory compliance | Brands under CSRD/PEF need product-level supplier data — suppliers who provide it get priority | French Eco-Score rollout, CSRD Scope 3 deadlines |
+| Volume anxiety | Visibility to 200+ brands creates inbound demand pipeline | Brand discovery → access requests → commercial conversations |
+
+### Messaging Alignment (pain → angle → sequence)
+
+| If strongest pain is... | Lead with angle... | Email sequence |
+|---|---|---|
+| Repetitive data requests / admin burden | **A — Organize, don't duplicate** | Sequence A or B |
+| Discovery / need more brand relationships | **B — Be where sourcing happens** | Sequence A or B |
+| Regulatory pressure / market access | **C — Regulation is your sales pitch** | Sequence B or C |
+| Credibility rebuilding (post-crisis, no LCA) | **Free verification as trust signal** | Sequence C |
+| Data sharing anxiety (dominant) | **Lead with access control + NDA** in opener | Any sequence, modify opener |
+
+### Objection Pre-Loading (pain → predicted objection)
+
+| Pain profile | Likely objection | Pre-load from |
+|---|---|---|
+| Data sharing anxiety is high | "What about confidentiality?" | Objection #1 |
+| Already has own platform/library | "We already manage our own data" | Custom: complementary layer |
+| Financial stress / post-crisis | "Why is it free?" | Objection #2 |
+| Large existing client base | "We already share with clients directly" | Objection #3 |
+| No LCA at all | "We don't have the data yet" | Objection #8 |
+| Competitor platform in use | "We already use [competitor]" | `references/competitive-positioning.md` |
+
+---
+
+## Quality Checks (before moving to Step 2)
+
+1. **Source verification:** Every claim has a URL + date. No invented pain points.
+2. **Recency:** Flag if most information is >12 months old. Prioritize last 3 months.
+3. **Numbers:** Replace vague claims ("low carbon") with data ("−2 kg CO₂e/kg"). Flag gaps.
+4. **Pain evidence:** Each pain has a source — not an assumption from the industry.
+5. **Stakeholder mapping:** At least one named contact with title.
+6. **Carbonfact mapping:** Every pain is mapped to a solution + angle before proceeding.
 
 ================================================================================
 FILE: references/email-sequences.md
@@ -519,7 +689,6 @@ After FU2, or on any "not now" reply, deploy the **warm referral P.S.**
 | After successful onboarding | 2–4 weeks post-profile-live | "Now that you're set up — any peer factories or material innovators who'd benefit from this?" |
 | LinkedIn DM fallback | After email sequence exhausted | "No worries if timing's off. Know anyone in your network who cares about environmental data?" |
 
-
 ================================================================================
 FILE: references/objection-handling.md
 ================================================================================
@@ -598,7 +767,6 @@ FILE: references/objection-handling.md
 
 **Key proof points**: Free review, critical review not mandatory, quality criteria are reasonable.
 
-
 ================================================================================
 FILE: references/competitive-positioning.md
 ================================================================================
@@ -643,7 +811,6 @@ FILE: references/competitive-positioning.md
 ## 30-Second Differentiator (for calls/conversations)
 
 > "Other platforms either measure carbon for brands or trace supply chains — but none of them give suppliers a profile they own and control, where brands can discover them and use their data directly in eco-design. Carbonfact for Suppliers is the only platform where your LCA data lives where sourcing decisions actually happen."
-
 
 ================================================================================
 FILE: references/market-opportunity.md
@@ -693,7 +860,6 @@ When analyzing a specific supplier, answer these questions to define the market 
 - Urgency: French Eco-Score rollout 2025–2026, CSRD Scope 3 reporting
 - → Email angle: "With the French Eco-Score launching and brands like On actively comparing recycled polyester suppliers on Carbonfact..."
 
-
 ================================================================================
 FILE: references/linkedin-cadence.md
 ================================================================================
@@ -726,7 +892,6 @@ Use LinkedIn as a **parallel channel to email**, not a replacement.
 - **Do**: Comment with substance — reference specific data, ask genuine questions, share relevant perspective
 - **Don't**: Drop generic "Great post!" comments, pitch in comments, comment on every single post (1–2 per week max)
 - **Best content to engage with**: Posts about sustainability milestones, certifications, new materials, regulation commentary, trade show recaps
-
 
 ================================================================================
 FILE: references/faq.md
@@ -814,7 +979,6 @@ Carbonfact doesn't provide legal advice. Many suppliers find that access control
 
 **Yes.** Carbonfact will review your LCA for free. If it meets their requirements, you're added to the directory. Third-party critical review is a nice-to-have, not mandatory.
 
-
 ================================================================================
 FILE: references/tracking-template.md
 ================================================================================
@@ -871,7 +1035,3 @@ When the user asks for a pipeline review:
 4. Suggest next actions for each active lead
 5. Identify warm referral opportunities from engaged suppliers
 
-
-================================================================================
-END OF DOCUMENT
-================================================================================

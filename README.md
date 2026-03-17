@@ -4,13 +4,16 @@ A Claude AI skill for prospecting, qualifying, and onboarding suppliers onto [Ca
 
 ## What It Does
 
-Feed it a supplier website, LinkedIn URL, or company name — and it runs an 11-step pipeline:
+Feed it a supplier website, LinkedIn URL, or company name — and it runs a 12-step pipeline:
 
 ```
-Supplier URL → Research → Classify (Tier 1/2/3) → Phase (0–3) → ICP Score (0–100)
-→ Intro-Call Probability → Market Opportunity Map → Prospecting Angle Selection
-→ Personalized Email Sequence → Objection Handling → Warm Referral Strategy → Next Action
+Supplier URL → Deep Research (4 phases) → Pain Points with Evidence
+→ Classify (Tier 1/2/3) → Phase (0–3) → ICP Score (0–100)
+→ Intro-Call Probability → Market Opportunity Map → Angle (from pain profile)
+→ Pain-Injected Email Sequence → Objection Handling → Warm Referral → Next Action
 ```
+
+The research phase does the heavy lifting: it fetches the company website, searches recent news, identifies evidence-backed pain points, maps each pain to a Carbonfact solution, and feeds all of this into the email drafting step — so emails address the supplier's actual situation, not generic templates.
 
 ### Example Input
 
@@ -26,38 +29,42 @@ Context: They already work with GANNI, which is a Carbonfact client.
 ```
 ## Supplier Analysis: Circulose®
 
-### Classification
-- Tier: 1 — Next-gen recycled cellulose pulp, 60+ material SKUs, TextileGenesis traceability
-- Phase: 1 — Aware but Passive (deep sustainability infra, no standardized LCA sharing)
-- ICP Score: 87/100
+### Research Summary
+- Product: Recycled dissolving pulp from 100% textile waste
+- Stage: Post-bankruptcy restart (Altor acquisition June 2024)
+- Production: Restarting Q4 2026 at Ortviken, Sweden
+- Clients: H&M, Mango, M&S, Bestseller, C&A, Reformation + 5 more
+- LCA: SCS 2017 study (negative carbon footprint) — data gap: no recent product-level numbers
 
-### Intro Call Probability
-- Score: 75 points → High (>70%)
+### Pain Points Driving the Approach
+- Pain #1: Credibility rebuilding post-bankruptcy → Free verification adds trust signal
+- Pain #2: 60+ SKUs with zero published LCA per material → Environmental data portfolio
+- Pain #3: GANNI (Carbonfact client) modeling without their real data → Bridge angle
 
 ### Email Drafts
-[3 fully personalized emails with GANNI bridge angle...]
-
-### Top 3 Objections & Responses
-[Tailored to their existing Material Library and traceability solution...]
+[3 emails: opens with bankruptcy recovery, not "impressive you have an LCA"]
 ```
 
 ## Skill Structure
 
 ```
 bd-carbonfact-suppliers/
-├── SKILL.md                                  # Core logic (269 lines)
+├── SKILL.md                                  # Core logic (353 lines)
 │   ├── How to Use
-│   ├── 11-Step Pipeline
+│   ├── 12-Step Pipeline
+│   ├── Deep Research Instructions (→ references/deep-research.md)
 │   ├── Supplier Segmentation (Tier 1/2/3)
 │   ├── ICP Scoring Rubric (0–100)
 │   ├── Phase Detection (0–3)
 │   ├── Customer Pathway (Cold → Onboarded)
 │   ├── Intro-Call Probability Model
 │   ├── UVP Framework (Why/What/How)
+│   ├── Pain-to-Email Injection Logic
 │   ├── Output Template
 │   └── Pointers → reference files
 │
 └── references/                               # Loaded on-demand
+    ├── deep-research.md                      # 4-phase research methodology + pain mapping
     ├── email-sequences.md                    # Full Tier 1/2/3 email templates
     ├── objection-handling.md                 # 8 objections with scripted responses
     ├── competitive-positioning.md            # vs Vaayu, Fairly Made, consultancies
@@ -67,29 +74,24 @@ bd-carbonfact-suppliers/
     └── tracking-template.md                  # Pipeline tracker format
 ```
 
-**Design principle**: Progressive disclosure. The core `SKILL.md` (269 lines) loads on every trigger. Reference files (~490 lines total) load only when needed — keeping context lean and responses fast.
+**Design principle**: Progressive disclosure. The core `SKILL.md` (353 lines) loads on every trigger. Reference files load only when needed — keeping context lean and responses fast. The `deep-research.md` file is always read first as Step 1 of the pipeline.
 
 ## Installation
 
-### Claude.ai (Recommended)
+### Claude.ai
 
-1. Download the `.skill` file from [Releases](../../releases)
-2. Go to **Settings → Features → Skills**
-3. Upload the `.skill` file
-4. Toggle it **on**
+1. Download the `bd-carbonfact-suppliers/` folder
+2. Zip it: `zip -r bd-carbonfact-suppliers.skill bd-carbonfact-suppliers/`
+3. Go to **Settings → Features → Skills**
+4. Upload the `.skill` file and toggle it **on**
 5. Make sure **Code execution and file creation** is enabled in **Settings → Capabilities**
 
 ### Claude Code
 
 ```bash
-# Clone and copy to your skills directory
-git clone https://github.com/YOUR_USERNAME/bd-carbonfact-suppliers.git
-cp -r bd-carbonfact-suppliers ~/.claude/skills/
+git clone https://github.com/nicoeos/Skills-BD-CFS.git
+cp -r Skills-BD-CFS/bd-carbonfact-suppliers ~/.claude/skills/
 ```
-
-### Manual
-
-Copy the `bd-carbonfact-suppliers/` folder (with `SKILL.md` + `references/`) into your Claude skills directory.
 
 ## How to Use
 
@@ -119,10 +121,6 @@ They have GRS certification and sell to VF Corp."
 ```
 "I met this supplier at Première Vision, here's their site: [URL].
 They seem interested but worried about data privacy."
-```
-
-```
-"Compare how we should position against Vaayu when talking to this supplier."
 ```
 
 ## Core Frameworks
@@ -157,8 +155,6 @@ They seem interested but worried about data privacy."
 
 The skill replies in the language of your input. Email drafts are adapted to the target recipient's language and local business norms — not just translated.
 
-Supported: English, French, Spanish, German, Italian, and any other language Claude supports.
-
 ## What This Skill Does NOT Do
 
 - Brand-side prospection (separate concern)
@@ -177,13 +173,11 @@ Supported: English, French, Spanish, German, Italian, and any other language Cla
 
 ## Contributing
 
-Found a better objection response? A regulation update? A new prospecting angle that converts?
-
 1. Fork the repo
 2. Edit the relevant file in `references/`
 3. Open a PR with context on what changed and why
 
-Keep `SKILL.md` under 300 lines. Move detailed content to `references/`.
+Keep `SKILL.md` under 500 lines. Move detailed content to `references/`.
 
 ## License
 
